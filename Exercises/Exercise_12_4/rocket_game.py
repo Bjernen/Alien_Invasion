@@ -1,10 +1,10 @@
 import sys
 import pygame
-from settings import Settings
-from ship import Ship
+from rocket_settings import Settings
+from rocket import Rocket
 
 
-class AlienInvasion:
+class RocketGame:
     """Overall class to manage the game assets and behavior."""
 
     def __init__(self):
@@ -13,9 +13,9 @@ class AlienInvasion:
         self.settings = Settings()
 
         self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
-        pygame.display.set_caption("Alien Invasion")
+        pygame.display.set_caption("Rocket Game")
 
-        self.ship = Ship(self)
+        self.ship = Rocket(self)
 
     def run_game(self):
         """Start the main loop of the game"""
@@ -40,6 +40,10 @@ class AlienInvasion:
             self.ship.moving_right = True
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = True
+        elif event.key == pygame.K_UP:
+            self.ship.moving_up = True
+        elif event.key == pygame.K_DOWN:
+            self.ship.moving_down = True
         elif event.key == pygame.K_q:
             sys.exit()
 
@@ -49,6 +53,10 @@ class AlienInvasion:
             self.ship.moving_right = False
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = False
+        elif event.key == pygame.K_UP:
+            self.ship.moving_up = False
+        elif event.key == pygame.K_DOWN:
+            self.ship.moving_down = False
 
     def _update_screen(self):
         """Update images on the screen, and flip to new screen."""
@@ -60,5 +68,5 @@ class AlienInvasion:
 
 if __name__ == '__main__':
     # Make a game instance, and run the game.
-    ai = AlienInvasion()
+    ai = RocketGame()
     ai.run_game()
